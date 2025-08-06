@@ -5,6 +5,7 @@
 # include <unistd.h>
 # include <signal.h>
 # include <limits.h>
+# include <stdio.h>
 
 extern volatile int		g_bit_received;
 

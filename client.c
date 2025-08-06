@@ -23,9 +23,15 @@ void	send_char(char c, int pid)
 	while (bit < 8)
 	{
 		if ((c >> bit) & 1)
-			kill(pid, SIGUSR2);
+		{
+			if (kill(pid, SIGUSR2) == -1)
+				exit(EXIT_FAILURE);
+		}
 		else
-			kill(pid, SIGUSR1);
+		{
+			if (kill(pid, SIGUSR1) == -1)
+				exit(EXIT_FAILURE);
+		}
 		while (!g_bit_received)
 			pause();
 		g_bit_received = 0;
@@ -41,9 +47,15 @@ void	send_length(int l, int pid)
 	while (bit < 22)
 	{
 		if ((l >> bit) & 1)
-			kill(pid, SIGUSR2);
+		{
+			if (kill(pid, SIGUSR2) == -1)
+				exit(EXIT_FAILURE);
+		}
 		else
-			kill(pid, SIGUSR1);
+		{
+			if (kill(pid, SIGUSR1))
+				exit(EXIT_FAILURE);
+		}
 		while (!g_bit_received)
 			pause();
 		g_bit_received = 0;
